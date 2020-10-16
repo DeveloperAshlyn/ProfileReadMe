@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GitHub profile readme generator - by @DeveloperAshlyn</title>
+    <meta name="description" content="GitHub profile readme generator is a tool that allows you to create simple and beautiful readme that you can copy/paste and include in your profile repository as profile preview." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Em0Cracker" />
+    <meta name="twitter:title" content="GitHub profile readme generator" />
+    <meta name="twitter:description" content="GitHub profile readme generator is a tool that allows you to create simple and beautiful readme that you can copy/paste and include in your profile repository as profile preview." />
+    <meta name="twitter:creator" content="@Em0Cracker" />
+    <meta name="twitter:image" content="" />
+
+    <meta property="og:title" content="GitHub profile readme generator" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://developerashlyn.github.io/profilereadme/" />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content="GitHub profile readme generator is a tool that allows you to create simple and beautiful readme that you can copy/paste and include in your profile repository as profile preview." />
+
+    <link href="https://developerashlyn.github.io/profilereadme/" rel="canonical" />
+    <link rel="icon" type="image/png" href="images/icon.png" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vue-simple-markdown.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!-- TODO: Record new GIF for README -->
+    <div id="app" class="container-xl">
+        <app-nav>
+            <div class="jumbotron">
+                <h1 class="display-5 bold">GitHub profile readme generator</h1>
+                <p class="lead">Super simple GitHub profile readme generator made with Vue.js, that allows you to create beautiful readme files that you can copy/paste in your profile.</p>
+                <hr class="my-4">
+                
+            </div>
+        </app-nav>
+
+        <app-view class="row">
+
+            <app-content class="col-xs-12 col-md-6">
+                <div class="md-tips mt-3">
+                    Markdown Tips:
+                    <ul>
+                        <li>To <b>bolden</b> the text, wrap it with two asterisks (*) (<code>**<b>word</b>**</code>)</li>
+                        <li>To <i>italisize</i> the text, wrap it with one asterisk (*) (<code>*<i>word</i>*</code>)</li>
+                        <li>To <s>strikethrough</s> the text, wrap it with two tildes (~) (<code>~~<s>word</s>~~</code>)</li>
+                        <li>To make a <a href="#">link</a>, place the link text in brackets and the url in parentheses
+                            (<code>[<a href="http://example.com">link</a>](http://example.com)</code>)</li>
+                        <li>To make an <img class="example-icon" src="images/icon.png" /> image, place an !, the alt
+                            text in brackets, and the url in parentheses (<code>![github](/images/icon.png)</code>)</li>
+                    </ul>
+                    <p>
+                        Learn more:
+                        <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">
+                            https://guides.github.com/features/mastering-markdown/
+                        </a>
+                    </p>
+                </div>
+                
+                <nav class="nav nav-pills nav-justified">
+                    <a class="nav-item nav-link" href="#" onclick="return false;" @click="tab = 'header'" :class="[tab == 'header' ? 'active' : '', '']">Header</a>
+                    <a class="nav-item nav-link" href="#" onclick="return false;" @click="tab = 'additional'" :class="[tab == 'additional' ? 'active' : '', '']">Additional</a>
+                    <a class="nav-item nav-link" href="#" onclick="return false;" @click="tab = 'social'" :class="[tab == 'social' ? 'active' : '', '']">Social</a>
+                    <a class="nav-item nav-link" href="#" onclick="return false;" @click="tab = 'stats'" :class="[tab == 'stats' ? 'active' : '', '']">Others</a>
+                </nav>
+
+                <div v-if="tab == 'header'" class="tab">
+                    <h3>Header</h3>
+
+                    <custom-input v-model="data.title" title="Heading" placeholder="Enter heading.."></custom-input>
+
+                    <custom-input v-model="data.subtitle" title="Subtitle" placeholder="Enter subtitle.."></custom-input>
+
+                    <div class="form-group">
+                        <label>About me</label>
+                        <textarea v-model="data.text" placeholder="Enter text.." class="form-control">{{data.text}}</textarea>
+                    </div>
+
+                    <custom-input v-model="data.skills" title="Skills" placeholder="Enter skills.."></custom-input>
+
+                    <custom-input v-model="data.banner" title="Banner URL" placeholder="Enter banner URL.."></custom-input>
+                </div>
+
+                <div v-if="tab == 'additional'" class="tab">
+                    <h3>Additional information</h3>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.working" title="🔭 I’m currently working on.." placeholder="Enter details.."></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.learning" title="🌱 I’m currently learning.." placeholder="Enter details.."></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.collaborate" title="👯 I’m looking to collaborate on.." placeholder="Enter details.."></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.help" title="🤔 I’m looking for help with.." placeholder="Enter details.."></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.ask" title="💬 Ask me about.." placeholder="Enter details.."></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.reach" title="📫 How to reach me: " placeholder="Enter details.."></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.pronouns" title="😄 Pronouns: " placeholder="Enter details.."></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.fact" title="⚡ Fun fact: " placeholder="Enter details.."></custom-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="tab == 'social'" class="tab">
+                    <h3>Social information</h3>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.github" title="GitHub" placeholder="Enter username.." brand="github"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.dev" title="DEV.TO" placeholder="Enter username.." brand="dev-dot-to"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.linkedin" title="LinkedIn" placeholder="Enter username.." brand="linkedin"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.facebook" title="Facebook" placeholder="Enter username.." brand="facebook"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.instagram" title="Instagram" placeholder="Enter username.." brand="instagram"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.twitter" title="Twitter" placeholder="Enter username.." brand="twitter"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.codepen" title="Codepen" placeholder="Enter username.." brand="codepen"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.codesandbox" title="CodeSandbox" placeholder="Enter username.." brand="codesandbox"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.stackoverflow" title="Stack Overflow" placeholder="Enter user ID.." brand="stackoverflow"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.youtube" title="YouTube" placeholder="Enter channel ID.." brand="youtube"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.twitch" title="Twitch" placeholder="Enter username.." brand="twitch"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <custom-input v-model="data.reddit" title="Reddit" placeholder="Enter username.." brand="reddit"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-12">
+                            <custom-input v-model="data.website" title="Website" placeholder="Enter URL.." brand="icloud"></custom-input>
+                        </div>
+                        <div class="col-xs-12 col-md-12">
+                            <h4>Others</h4>
+                        </div>
+                        <div class="col-xs-12 col-md-12" v-for="item in data.items">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Icon</label>
+                                        <select v-model="item.icon" class="form-control">
+                                            <option v-for="icon in icons" :value="icon.title">{{icon.title}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <custom-input v-model="item.value" title="Link" placeholder="Enter URL.."></custom-input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12">
+                            <button @click="addItem" class="btn btn-primary">Add more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="tab == 'stats'" class="tab">
+                    <h3>Statistics</h3>
+
+                    <p>GitHub username required.</p>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" v-model="data.views">
+                                <label class="custom-control-label" for="customCheck1">Show profile views</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2" v-model="data.stats">
+                                <label class="custom-control-label" for="customCheck2">Show GitHub statistics</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck3" v-model="data.languages">
+                                <label class="custom-control-label" for="customCheck3">Show most used languages</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="defaultCheck4" v-model="data.private" :disabled="!data.stats">
+                                <label class="custom-control-label" for="defaultCheck4">Include private repositories</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-3">Github Trophies</h3>
+
+                    <p>GitHub username required.</p>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck4" v-model="data.trophy">
+                                <label class="custom-control-label" for="customCheck4">Show Trophies</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-3">Github Badges</h3>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck5" v-model="data.arctic">
+                                <label class="custom-control-label" for="customCheck5">Arctic Contributor</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck6" v-model="data.devprog">
+                                <label class="custom-control-label" for="customCheck6">Developer Program</label>
+                            </div>
+                        </div>
+			            <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck7" v-model="data.star">
+                                <label class="custom-control-label" for="customCheck7">Stars Program</label>
+                            </div>
+                        </div>
+			            <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck8" v-model="data.sponsor">
+                                <label class="custom-control-label" for="customCheck8">Sponsor</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck9" v-model="data.gitpro">
+                                <label class="custom-control-label" for="customCheck9">Github Pro</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-3">GitHub Metrics</h3>
+
+                    <p>GitHub username required.</p>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="custom-control custom-checkbox mb-2">
+                                <input type="checkbox" class="custom-control-input" id="customCheck10" v-model="data.metrics">
+                                <label class="custom-control-label" for="customCheck10">Show GitHub metrics</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </app-content>
+
+            <app-sidebar class="col-xs-12 col-md-6 mt-3">
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Preview</h5>
+                        <vue-markdown :source="source"></vue-markdown>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title"> 👩‍💻 Code</h5>
+                            <button class="btn btn-primary mb-2 d-flex" @click="copyCode">
+                                <svg style="width: 1.5rem; height: 1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg> &nbsp;
+                                <span> Copy</span>
+                            </button>
+                        </div>
+                        <div class="alert alert-danger" role="alert" v-if="forced">
+                            Changing source manually could result in lost of data if you use generation fields again.
+                        </div>
+                        <!-- TODO: Highlight the textarea as markdown code -->
+                        <textarea v-model="source" @keyup="onKeyUp" class="form-control" ref="code">{{ source }}</textarea>
+                    </div>
+                </div>
+
+            </app-sidebar>
+
+        </app-view>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Made with ❤ by <a href="https://github.com/DeveloperAshlyn" target="_blank">@DeveloperAshlyn</a>.</p>
+        </div>
+    </footer>
+
+    <script src="js/vue.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/markdown.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
+
